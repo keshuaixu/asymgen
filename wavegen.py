@@ -12,6 +12,6 @@ def asymmetric_sine(frequency=20, amplitude=1, direction=1, asymmetricity=0, sam
 
 def heather_wave(hold_width=0.02, slope_width=0.03, amplitude=1, direction=1, sample_rate=44100):
     samples_hold = np.repeat(1, hold_width * sample_rate)
-    samples_slope = np.linspace(1, 0, num=slope_width * sample_rate)
+    samples_slope = np.linspace(1, -1, num=slope_width * sample_rate)
     return np.hstack(([0], samples_hold, samples_slope, [0])) * amplitude * direction
     # return np.hstack((samples_hold, samples_slope)) * amplitude * direction

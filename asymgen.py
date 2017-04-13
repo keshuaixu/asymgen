@@ -22,6 +22,7 @@ device_info = sd.query_devices(device=args.device[0], kind='output')
 
 print(args)
 
+
 def curses_main(win):
     win.nodelay(True)
     key = ''
@@ -44,7 +45,7 @@ def curses_main(win):
             samples = np.vstack(
                 (s if ch == args.channel[0] else np.zeros(s.size) for ch in
                  range(device_info['max_output_channels']))).transpose()
-            sd.play(samples, 44100, blocking=True, loop=False, device=args.device[0])
+            sd.play(np.tile(samples, (10, 1)), 44100, blocking=True, loop=False, device=args.device[0])
 
 
 
