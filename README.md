@@ -9,7 +9,7 @@ Python 3.6
 ```
 cd asymgen
 virtualenv venv -p python3.6
-source venv/bin/activate
+source venv/bin/activatebutton
 pip install -r requirements.txt
 ```
 
@@ -17,4 +17,4 @@ pip install -r requirements.txt
 ```
 python asymgen.py
 ```
-use <button>,</button>
+use <kbd>,</kbd>
