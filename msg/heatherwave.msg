@@ -1,0 +1,4 @@
+float64 amplitude
+float64 hold_width
+float64 slope_width
+int64 repeat
