@@ -31,7 +31,7 @@ class AsymGenNode:
         rospy.init_node('asymgen')
         self.device_info = sd.query_devices(device=args_.device[0], kind='output')
         self.args = args_
-        rospy.Subscriber(f'asymgen/out/{args_.channel[0]}', heatherwave, self.heather_callback)
+        rospy.Subscriber(f'asymgen/input', heatherwave, self.heather_callback)
 
     def heather_callback(self, msg):
         s = heather_wave(hold_width=msg.hold_width, slope_width=msg.slope_width,
