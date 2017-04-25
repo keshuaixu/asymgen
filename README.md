@@ -7,6 +7,9 @@ Python 3.6
 virtualenv
 
 # install
+
+Don't forget to source your ros **and** catkin workspace `setup.bash`
+
 clone it into your `catkin_ws/src`
 ```
 cd asymgen
@@ -20,27 +23,14 @@ catkin_make
 ```
 
 # run
-Only -d and -c are actually used. Other parameters come from the message.
-```
-usage: python asymgen.py [-h] [-d DEVICE] [-c CHANNEL] [-wh HOLD_WIDTH]
-                  [-ws SLOPE_WIDTH] [-a AMPLITUDE] [-r DIRECTION]
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -d DEVICE, --device DEVICE
-  -c CHANNEL, --channel CHANNEL
-  -wh HOLD_WIDTH, --hold-width HOLD_WIDTH
-  -ws SLOPE_WIDTH, --slope-width SLOPE_WIDTH
-  -a AMPLITUDE, --amplitude AMPLITUDE
-  -r DIRECTION, --direction DIRECTION
-
+```bash
+ roslaunch asymgen dvrk_haptic_asym.launch 
 ```
 
 # topics
-`asymgen/out/0`
-`asymgen/out/1`
-`...`
-depending on the audio channel.
+`wave2sound0/wave`
+`wave2sound1/wave`
 
 message type `heatherwave`
 
