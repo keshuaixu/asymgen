@@ -18,20 +18,25 @@ parser.add_argument('-wh', '--hold-width', type=float, nargs=1, default=[0.03])
 parser.add_argument('-ws', '--slope-width', type=float, nargs=1, default=[0.02])
 parser.add_argument('-a', '--amplitude', type=float, nargs=1, default=[1.0])
 parser.add_argument('-r', '--direction', type=float, nargs=1, default=1)
+parser.add_argument('-q', '--query-devices', action='store_true')
 
-args = parser.parse_args()
+args, unknown = parser.parse_known_args()
 
-if args.device is None:
+if args.query_devices:
     print(sd.query_devices())
     exit()
 
 
 class AsymGenNode:
     def __init__(self, args_):
-        rospy.init_node('asymgen')
-        self.device_info = sd.query_devices(device=args_.device[0], kind='output')
+        rospy.init_node('wave2sound')
+        if args_.device is not None:
+            self.output_device = args_.device[0]
+        else:
+            self.output_device = sd.default.device
+        self.device_info = sd.query_devices(device=self.output_device, kind='output')
         self.args = args_
-        rospy.Subscriber(f'asymgen/input', heatherwave, self.heather_callback)
+        rospy.Subscriber('wave', heatherwave, self.heather_callback)
 
     def heather_callback(self, msg):
         s = heather_wave(hold_width=msg.hold_width, slope_width=msg.slope_width,
@@ -39,7 +44,7 @@ class AsymGenNode:
         samples = np.vstack(
             (s if ch == self.args.channel[0] else np.zeros(s.size) for ch in
              range(self.device_info['max_output_channels']))).transpose()
-        sd.play(np.tile(samples, (msg.repeat, 1)), 44100, blocking=True, loop=False, device=self.args.device[0])
+        sd.play(np.tile(samples, (msg.repeat, 1)), 44100, blocking=True, loop=False, device=self.output_device)
 
     
 print(args)
