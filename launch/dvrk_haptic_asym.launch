@@ -1,16 +1,25 @@
 <launch>
 
-  <group ns="wave2sound0">
-    <node pkg="asymgen" name="wave2sound" type="wave2sound.py" args="-c 0" output="screen"/>
-  </group>
+    <group ns="wave2sound_0">
+        <node pkg="asymgen" name="wave2sound" type="wave2sound.py" args="-c 0" output="screen"/>
+    </group>
 
-  <group ns="wave2sound1">
-    <node pkg="asymgen" name="wave2sound" type="wave2sound.py" args="-c 1" output="screen"/>
-  </group>
+    <group ns="wave2sound_1">
+        <node pkg="asymgen" name="wave2sound" type="wave2sound.py" args="-c 1" output="screen"/>
+    </group>
 
-  <!--<node pkg="turtlesim" name="mimic" type="mimic">-->
+    <group ns="force2wave">
+        <node pkg="asymgen" name="force2wave" type="force2wave.py" output="screen">
+            <remap from="wrench" to="/dvrk_psm/haptics_feedback_force"/>
+            <remap from="wave_x" to="/wave2sound_0/wave"/>
+            <remap from="wave_z" to="/wave2sound_1/wave"/>
+        </node>
+    </group>
+
+
+    <!--<node pkg="turtlesim" name="mimic" type="mimic">-->
     <!--<remap from="input" to="turtlesim1/turtle1"/>-->
     <!--<remap from="output" to="turtlesim2/turtle1"/>-->
-  <!--</node>-->
+    <!--</node>-->
 
 </launch>

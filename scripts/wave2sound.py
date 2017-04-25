@@ -44,7 +44,7 @@ class AsymGenNode:
         samples = np.vstack(
             (s if ch == self.args.channel[0] else np.zeros(s.size) for ch in
              range(self.device_info['max_output_channels']))).transpose()
-        sd.play(np.tile(samples, (msg.repeat, 1)), 44100, blocking=True, loop=False, device=self.output_device)
+        sd.play(np.tile(samples, (msg.repeat, 1)), 44100, blocking=False, loop=False, device=self.output_device)
 
     
 print(args)
