@@ -18,15 +18,15 @@ class Force2Wave:
         self.wave_pub_y = rospy.Publisher('wave_y', heatherwave, queue_size=10)
         self.wave_pub_z = rospy.Publisher('wave_z', heatherwave, queue_size=10)
         self.amp_x, self.amp_y, self.amp_z = (0, 0, 0)
-        rospy.Timer(rospy.Duration(nsecs=200_000_000), self.timer_callback)
+        rospy.Timer(rospy.Duration(1/40), self.timer_callback)
 
     def wrench_callback(self, w):
         force = w.wrench.force
         self.amp_x, self.amp_y, self.amp_z = normalize(np.array([force.x, force.y, force.z]), gain=100)
 
     def timer_callback(self, evt):
-        hold_width = 0.02
-        slope_width = 0.03
+        hold_width = 0.007
+        slope_width = 0.025
         repeat = 1
         wave_x = heatherwave(amplitude=self.amp_x, hold_width=hold_width, slope_width=slope_width, repeat=repeat)
         wave_y = heatherwave(amplitude=self.amp_y, hold_width=hold_width, slope_width=slope_width, repeat=repeat)
