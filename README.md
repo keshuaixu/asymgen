@@ -38,12 +38,3 @@ catkin_make
 `wave2sound1/wave`
 
 message type `heatherwave`
-
-# test message
-```bash
-rostopic pub /asymgen/out/0 asymgen/heatherwave "amplitude: 1.0
-hold_width: 0.05
-slope_width: 0.05
-repeat: 10" 
-```
-You should be able to hear clicks from your speaker
