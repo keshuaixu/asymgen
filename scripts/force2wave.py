@@ -22,7 +22,7 @@ class Force2Wave:
 
     def wrench_callback(self, w):
         force = w.wrench.force
-        self.amp_x, self.amp_y, self.amp_z = normalize(np.array([force.x, force.y, force.z]), gain=100)
+        self.amp_x, self.amp_y, self.amp_z = normalize(np.array([force.x, force.y, force.z]), gain=1000)
 
     def timer_callback(self, evt):
         hold_width = 0.007

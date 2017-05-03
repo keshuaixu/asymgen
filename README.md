@@ -3,7 +3,12 @@ asymmetric haptic feedback function generator with sound card
 
 # requirements
 
+Ubuntu 16.04
+
+ROS kinetic
+
 Python 3.6
+
 virtualenv
 
 # install
@@ -41,9 +46,4 @@ hold_width: 0.05
 slope_width: 0.05
 repeat: 10" 
 ```
-You should be able to hear clicks
-
-# todo
-launch file
-
-create another node to convert from force to heatherwave
+You should be able to hear clicks from your speaker
